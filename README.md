@@ -115,6 +115,30 @@ Task_B/
 * Distance metric : Euclidean distance
 * Optimizer : Adam, Loss: Binary Crossentropy
 
+### ⚙️ How to Train
+
+```python
+if os.path.exists(MODEL_SAVE_PATH):
+    print("\n--> Loading existing model to continue training...")
+    model = tf.keras.models.load_model(MODEL_SAVE_PATH, custom_objects={'euclidean_distance': euclidean_distance})
+    embedding_model = tf.keras.models.load_model(EMBEDDING_SAVE_PATH)
+else:
+    print("\n--> Building new model...")
+    model, embedding_model = build_siamese_network(INPUT_SHAPE)
+    model.compile(loss='binary_crossentropy', optimizer=Adam(1e-4), metrics=['accuracy'])
+
+print("\n--> Preparing generator and starting training chunk...")
+generator = PairGenerator(IDENTITY_DIR, batch_size=BATCH_SIZE, steps_per_epoch=NUM_PAIRS // BATCH_SIZE)
+model.fit(generator, epochs=EPOCHS)
+
+print("--> Saving models after training chunk...")
+model.save(MODEL_SAVE_PATH)
+embedding_model.save(EMBEDDING_SAVE_PATH)
+
+
+embedding_model = tf.keras.models.load_model(EMBEDDING_SAVE_PATH)
+```
+
 ### ⚙️ Training
 
 * Training pairs : 10,000
