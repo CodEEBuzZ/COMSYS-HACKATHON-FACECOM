@@ -7,13 +7,13 @@ This repository contains little discussion for both tasks from the COMSYS Hackat
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## Task A :--- Gender Classification
+## 🔹 Task A :--- Gender Classification
 
-### Description
+### 📝 Description
 
 The objective of Task A is to build a gender classification model that identifies whether a given face image is of a **male** or **female**.
 
-### Dataset Structure
+### 📁 Dataset Structure
 
 ```
 Comys_Hackathon5
@@ -27,13 +27,13 @@ Task_A/
 │   └── female/
 ```
 
-### Model
+### 🧠 Model
 
 * Base model: `EfficientNetB0`
 * Transfer Learning with fine-tuning
 * Final layer: Dense(1, activation='sigmoid')
 
-### How to Train
+### ⚙️ How to Train
 
 ```python
 model.fit(
@@ -45,7 +45,7 @@ model.fit(
 )
 ```
 
-### Fine Tuning
+### ⚙️ Fine Tuning
 
 ```python
 for layer in base_model.layers:
@@ -61,18 +61,18 @@ model.fit(
 )
 ```
 
-### Model Weights
+### 💾 Model Weights
 
 Due to GitHub size limits, model weights (`.h5` files) are stored in Google Drive and linked in the submission.
 
-### Evaluation Metrics
+### 📊 Evaluation Metrics
 
 * Accuracy
 * Precision
 * Recall
 * F1-Score
 
-### Evaluation Metrices Results
+### ✅ Evaluation Metrices Results
 
 Evaluation Results on Validation Set :---
 |   Metric   |  Score   |
@@ -83,14 +83,16 @@ Evaluation Results on Validation Set :---
 |  F1-Score  | \~0.9068 |
 
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## Task B: Face Recognition
 
-### Description
+## 🔹 Task B: Face Recognition
+
+### 📝 Description
 
 Task B aims to recognize distorted face images by matching them to clean reference identities. The TASK_B repo contains code using a **Siamese Neural Network** with contrastive learning.
 
-### Dataset Structure
+### 📁 Dataset Structure
 
 ```
 Comys_Hackathon5
@@ -106,54 +108,66 @@ Task_B/
         └── distorted/
 ```
 
-### Model
+### 🧠 Model
 
 * Siamese Network using Conv layers
 * Embedding size : 512
 * Distance metric : Euclidean distance
 * Optimizer : Adam, Loss: Binary Crossentropy
 
-### Training
+### ⚙️ Training
 
 * Training pairs : 10,000
 * Epochs : 30 (can increase if needed)
 * Batch size : 16
 
-### Evaluation Metrics
+### 📊 Evaluation Metrics
 
 * Top-1 Accuracy
 * Macro-averaged F1-Score
 
-### ✅ Results
+### ✅ Evaluation Metrices Results
 
 | Metric   | Score    |
 | -------- | -------- |
 | Accuracy | \~0.7162 |
 | F1-Score | \~0.5856 |
 
-### Model Weights
+### 💾 Model Weights
 
 Due to GitHub size limits, model weights (`.h5` files) are stored in Google Drive and linked in the submission.
 
----
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 ## 📁 Directory Layout
 
 ```
-Comys_Hackathon5/
+COMSYS-HACKATHON-FACECOM/
+├── README.md (this file)
 ├── Task_A/
 ├── Task_B/
-└── README.md (this file)
+├── gender_classification_best_model_h5 (TASK_A)
+├── embedding_model_h5 (TASK_B)
+├── face_matching_h5 model (TASK_B)
+├── 1 page technical summary
 ```
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 ## 📌 Submission Checklist
 
 * [x] Code for Task A & B
 * [x] Pretrained weights uploaded to Google Drive
-* [x] ! page Technical summary
+* [x] 1 page Technical summary
 * [x] README with full documentation
 
----
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 ## Coders
 
