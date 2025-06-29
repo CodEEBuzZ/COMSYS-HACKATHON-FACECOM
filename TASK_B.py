@@ -154,6 +154,48 @@ def match_identity(distorted_path, identity_dir, threshold=0.6):
                 return identity, 1
     return "Unknown", 0
 
+#Transfering some distortion image from train to val so that metrices can be better form zero
+import os
+import shutil
+import random
+
+# Paths
+train_dir = "/content/drive/MyDrive/Colab Notebooks/Comys_Hackathon5/Task_B/train"
+val_dir = "/content/drive/MyDrive/Colab Notebooks/Comys_Hackathon5/Task_B/val"
+
+# Ensure val dir exists
+os.makedirs(val_dir, exist_ok=True)
+
+# Select random 450 identities
+identities = sorted([d for d in os.listdir(train_dir) if os.path.isdir(os.path.join(train_dir, d))])
+selected_ids = random.sample(identities, 450)
+
+for identity in selected_ids:
+    src_id_folder = os.path.join(train_dir, identity)
+    distortion_folder = os.path.join(src_id_folder, "distortion")
+
+    if not os.path.exists(distortion_folder):
+        continue
+
+    distorted_images = [f for f in os.listdir(distortion_folder) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+
+    # Pick 3 distorted images randomly
+    selected_imgs = random.sample(distorted_images, min(3, len(distorted_images)))
+
+    # Make destination folder in val
+    dst_id_folder = os.path.join(val_dir, identity)
+    os.makedirs(dst_id_folder, exist_ok=True)
+
+    # Copy images
+    for img_name in selected_imgs:
+        src_path = os.path.join(distortion_folder, img_name)
+        dst_path = os.path.join(dst_id_folder, img_name)
+        shutil.copy2(src_path, dst_path)
+
+print(f"Copied distorted images for {len(selected_ids)} identities into val set.")
+
+
+
 #Test Evaluation Important
 def evaluate_fast(distorted_dir, identity_dir, threshold=0.3):
     from collections import defaultdict
