@@ -75,12 +75,12 @@ Due to GitHub size limits, model weights (`.h5` files) are stored in Google Driv
 ### ✅ Evaluation Metrices Results
 
 Evaluation Results on Validation Set :---
-|   Metric   |  Score   |
-| ---------- | -------- |
-| Accuracy   | \~0.8626 |
-| Precision  | \~0.9246 |
-|   Recall   | \~0.8896 |
-|  F1-Score  | \~0.9068 |
+|   Metric   |  Score  |
+| ---------- | ------- |
+| Accuracy   | \0.8626 |
+| Precision  | \0.9246 |
+|   Recall   | \0.8896 |
+|  F1-Score  | \0.9068 |
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -195,10 +195,10 @@ print(f"Copied distorted images for {len(selected_ids)} identities into val set.
 
 ### ✅ Evaluation Metrices Results
 
-| Metric   | Score    |
-| -------- | -------- |
-| Accuracy | \~0.7162 |
-| F1-Score | \~0.5856 |
+| Metric   | Score   |
+| -------- | ------- |
+| Accuracy | \0.7162 |
+| F1-Score | \0.5856 |
 
 ### 💾 Model Weights
 
@@ -238,10 +238,10 @@ COMSYS-HACKATHON-FACECOM/
 
 ## Coders
 
-* \Saikat Munshib(Leader)
-* \Team :--- Alpha Algorithm
-* \Government College of Engineering and Textile Technology, Serampore
-* \saikatmunshib@gmail.com
+* Saikat Munshib(Leader)
+* Team :--- Alpha Algorithm
+* Government College of Engineering and Textile Technology, Serampore
+* saikatmunshib@gmail.com
 
 ---
 
