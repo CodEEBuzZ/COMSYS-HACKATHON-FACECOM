@@ -195,55 +195,72 @@ for identity in selected_ids:
 print(f"Copied distorted images for {len(selected_ids)} identities into val set.")
 
 
+# Final Test Evaluation
 
-#Test Evaluation Important
+from tensorflow.keras.models import load_model
+import numpy as np
+import os
+from tqdm import tqdm
+from sklearn.metrics import accuracy_score, f1_score
+from tensorflow.keras.preprocessing.image import load_img, img_to_array
+
+# Constants
+IMG_SIZE = (128, 128)
+EMBEDDING_SAVE_PATH = "D:/COMSYS Hackathon/Comys_Hackathon5/Task_B/siamese_embedding_model.h5" # Siamese_embedding_model.h5 path must be here
+DISTORTED_DIR = "D:/COMSYS Hackathon/Comys_Hackathon5/Task_B/val" # Val Path must be here
+IDENTITY_DIR = "D:/COMSYS Hackathon/Comys_Hackathon5/Task_B/train" # Train Path must be here
+
+# Load model
+model = load_model(EMBEDDING_SAVE_PATH)
+
+def load_image(path):
+    img = load_img(path, target_size=IMG_SIZE)
+    img = img_to_array(img) / 255.0
+    return np.expand_dims(img, axis=0)
+
+def get_embedding(img_path):
+    return model.predict(load_image(img_path))[0]
+
 def evaluate_fast(distorted_dir, identity_dir, threshold=0.3):
-    from collections import defaultdict
-
-    print("\nIdentity Embidding...\n")
+    print("\nIndexing reference embeddings...")
     identity_db = {}
-    for identity in tqdm(os.listdir(identity_dir), desc="Indexing Identities"):
+    for identity in tqdm(os.listdir(identity_dir)):
         identity_folder = os.path.join(identity_dir, identity)
-        ref_images = get_all_identity_images(identity_folder)
-        embeddings = [get_embedding(img) for img in ref_images if get_embedding(img) is not None]
+        if not os.path.isdir(identity_folder): continue
+        refs = [os.path.join(identity_folder, f) for f in os.listdir(identity_folder)
+                if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+        embeddings = [get_embedding(f) for f in refs]
         if embeddings:
             identity_db[identity] = np.mean(embeddings, axis=0)
 
-    print("\nMatching distorted images...\n")
+    print("Matching distorted images...")
     y_true, y_pred = [], []
 
-    for identity in tqdm(os.listdir(distorted_dir), desc="Evaluating"):
+    for identity in tqdm(os.listdir(distorted_dir)):
         distorted_folder = os.path.join(distorted_dir, identity)
         if not os.path.isdir(distorted_folder): continue
-
         for file in os.listdir(distorted_folder):
             if file.lower().endswith(('.jpg', '.jpeg', '.png')):
-                distorted_path = os.path.join(distorted_folder, file)
-                distorted_embedding = get_embedding(distorted_path)
-                if distorted_embedding is None: continue
-
-                # Find closest match
-                min_dist = float('inf')
+                img_path = os.path.join(distorted_folder, file)
+                distorted_emb = get_embedding(img_path)
                 best_match = "Unknown"
-                for ref_id, ref_embedding in identity_db.items():
-                    dist = np.linalg.norm(distorted_embedding - ref_embedding)
+                min_dist = float('inf')
+                for ref_id, ref_emb in identity_db.items():
+                    dist = np.linalg.norm(distorted_emb - ref_emb)
                     if dist < min_dist:
                         min_dist = dist
                         best_match = ref_id
-
                 y_true.append(identity)
                 y_pred.append(best_match if min_dist < threshold else "Unknown")
 
-    # Metrics
-    labels = sorted(list(set(y_true + y_pred)))
-    label_map = {label: i for i, label in enumerate(labels)}
+    label_map = {label: idx for idx, label in enumerate(set(y_true + y_pred))}
     y_true_idx = [label_map[i] for i in y_true]
     y_pred_idx = [label_map[i] for i in y_pred]
 
     acc = accuracy_score(y_true_idx, y_pred_idx)
-    f1_macro = f1_score(y_true_idx, y_pred_idx, average='macro')
-
-    print("\nFinal Evaluation Metrics")
+    f1 = f1_score(y_true_idx, y_pred_idx, average='macro')
+    print("\n---------------------------Final Evaluation---------------------------")
     print(f"Top-1 Accuracy         : {acc:.4f}")
-    print(f"Macro-averaged F1 Score: {f1_macro:.4f}")
-evaluate_fast(DISTORTED_DIR,IDENTITY_DIR)
+    print(f"Macro-averaged F1 Score: {f1:.4f}")
+
+evaluate_fast(DISTORTED_DIR, IDENTITY_DIR)
