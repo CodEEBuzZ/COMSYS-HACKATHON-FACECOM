@@ -67,6 +67,8 @@ Due to GitHub size limits, model weights (`.h5` files) are stored in Google Driv
 
 ### 📊 Evaluation Metrics
 
+The whole code is present in the TASK_A.py file, their all the paths which are present need to change according to the system paths where the program will be run and then after that the program need to be run after that the whole output will be generate.
+
 * Accuracy
 * Precision
 * Recall
@@ -189,6 +191,8 @@ print(f"Copied distorted images for {len(selected_ids)} identities into val set.
 * Batch size : 16
 
 ### 📊 Evaluation Metrics
+
+The whole code is present in the TASK_B.py file, their all the paths which are present need to change according to the system paths where the program will be run and then after that the program need to be run after that the whole output will be generate.
 
 * Top-1 Accuracy
 * Macro-averaged F1-Score
