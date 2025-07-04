@@ -1,6 +1,6 @@
 # COMSYS-HACKATHON2025-FACECOM
 
-This repository contains little discussion for both tasks from the COMSYS Hackathon - 5:
+This repository contains step - wise discussion for both tasks from the COMSYS Hackathon - 5:
 
 * **Task A :---** Gender Classification (Binary Classification)
 * **Task B :---** Face Recognition (Multi-class Classification)
