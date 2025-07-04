@@ -67,12 +67,22 @@ Due to GitHub size limits, model weights (`.h5` files) are stored in Google Driv
 
 ### 📝 Steps for running the code
 
-* **Step 1 :-** For Colab, then mount need to be done, code present in TASK_A.py. If run done in jupyter notebook or any other platform then mount no need to do with drive. Just change the path according to the path of the system where the datas will be present either in C or D or any other place.
+***NEED TO DOWNLOAD***
+
+```bash
+   !pip install torch torchvision torchaudio
+   !pip install scikit-learn
+   !pip install matplotlib opencv-python
+   ```
+
+***STEPS***
+
+* **Step 1 :-** For Colab, then mount need to be done, code present in TASK_A.py. If this program runs in jupyter notebook or any other platform then mount no need to do with drive. Just change the path according to the path of the system where the datas will be present either in C or D or any other place or any drive.
 * **Step 2 :-** Import all the libraries which are present.
 *  **Step 3 :-** Then paste configuration, now changing those path need to be done.
 *  **Step 4 :-** After that all the code have to be run as it is and it will give result as well as it will train the the dats along with fine tunning.
-*  **Step 5 :-** At last loading need to be done so model path need to be give correctly that where the model is save, then it will give all the metrices. OR. The model is provided by me it can also be used then from that model correct result will be given.
-*  **Step 6 :-** This section is optional or it can also done that this section is for the hidden test checking, as 'Final Evaluation for Hidden Test'.
+*  **Step 5 :-** At last loading need to be done so for that model path need to be give correctly that where the model is save, then it will give all the metrices. OR. The model is provided by me it can also be used then from that also model will provide correct result.
+*  **Step 6 :-** This section is optional or it can be also done that this section is for the hidden test checking, as 'Final Evaluation for Hidden Test'.
 
 ### 📊 Evaluation Metrics
 
@@ -198,6 +208,50 @@ print(f"Copied distorted images for {len(selected_ids)} identities into val set.
 * Epochs : 30 (can increase if needed)
 * Batch size : 16
 
+### 💾 Model Weights
+
+Due to GitHub size limits, model weights (`.h5` files) are stored in Google Drive and linked in the submission.
+
+### 📝 Steps for running the code
+
+***NEED TO DOWNLOAD***
+* Install Microsoft Visual C++ Redistributable
+* Install Miniconda
+* Create a conda environment
+       ```bash
+       * conda create --name tf python=3.9
+       * conda deactivate
+         conda activate tf
+       ```
+* GPU setup
+       ```bash
+       *  conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
+       ```
+* Install TensorFlow
+       ```bash
+       * pip install --upgrade pip
+       * pip install "tensorflow<2.11"
+       ```
+* Verify the installation
+       ```bash
+       * python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+       ```
+* In Jupyter Notebook
+       ```bash
+       * !pip install scikit-learn tqdm opencv-python matplotlib pandas
+       * !pip install pillow
+       ```
+  
+***STEPS***
+* **Step 1 :-** This program can be runs in jupyter notebook or any other platform then mount no need to do with drive. Just change the path according to the path of the system where the datas will be present either in C or D or any other place or any drive.
+* **Step 2 :-** Import all the libraries which are present.
+*  **Step 3 :-** Then paste configuration, image size and everything, then locations or file path need to be changed according to the system where the program will run.
+*  **Step 4 :-** After that all the code have to be run as it is and it will give result as well as it will train the the dats along with fine tunning.
+*  **Step 5 :-** Before metrices running one have to do that due to some problems in test and validation data in TASK_B so for that some distortion image have to transfer from test to val data after that metrices giving best accuracy or result. If this problem not occurs in any dataset then no need to do or run that part, if problem happens or present then it have to do. Because if the dataset becomes wrong then answer will come as 0. 
+*  **Step 6 :-** At last loading need to be done so for that model path need to be give correctly that where the model is save the model is embidding model, then it will give all the metrices. OR. The embedding model is provided by me it can also be used then from that also model will provide correct result.
+*  **Step 7 :-** That matrices section can be done in colab also as it will give better result in colab also. Just ignore the training portion 'Training Data' no need to re run and then run the whole remaining code with accurate path and metrices code then it will give best result.
+*  **Step 8 :-** Model file already given in .h5 it can also be used for the running the whole code and also for the metrices checking also.
+
 ### 📊 Evaluation Metrics
 
 The whole code is present in the TASK_B.py file, their all the paths which are present need to change according to the system paths where the program will be run and then after that the program need to be run after that the whole output will be generate.
@@ -209,13 +263,8 @@ The whole code is present in the TASK_B.py file, their all the paths which are p
 
 | Metric   | Score  |
 | -------- | ------ |
-| Accuracy | 0.7162 |
-| F1-Score | 0.5856 |
-
-### 💾 Model Weights
-
-Due to GitHub size limits, model weights (`.h5` files) are stored in Google Drive and linked in the submission.
-
+| Accuracy | 0.6164 |
+| F1-Score | 0.5672 |
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
