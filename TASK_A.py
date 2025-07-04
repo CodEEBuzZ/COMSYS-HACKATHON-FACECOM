@@ -136,52 +136,8 @@ prec_train = precision_score(y_train_true, preds_train)
 rec_train = recall_score(y_train_true, preds_train)
 f1_train = f1_score(y_train_true, preds_train)
 
-print("\n.......... Training Results ...........")
+print("\n.......... Evaluation Results on Training Set ...........")
 print(f"--> Accuracy:  {acc_train:.4f}")
 print(f"--> Precision: {prec_train:.4f}")
 print(f"--> Recall:    {rec_train:.4f}")
 print(f"--> F1 Score:  {f1_train:.4f}")
-
-
-# ===================== Final Evaluation for Hidden Test (Totally Optional) this last part =====================
-
-#Block for testing on "Hidden Test"
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
-import numpy as np
-
-# --> Load the trained model
-model = load_model('gender_classification_best_model.h5')
-
-# --> Set this path to the test data when running
-test_dir = '/path/to/hidden_test_data'  # --> Replace this with actual test path
-
-# --> Create generator
-IMG_SIZE = (224, 224)
-test_datagen = ImageDataGenerator(rescale=1./255)
-test_generator = test_datagen.flow_from_directory(
-    test_dir,
-    target_size=IMG_SIZE,
-    batch_size=1,
-    class_mode='binary',
-    shuffle=False
-)
-
-# --> Make predictions
-preds_prob = model.predict(test_generator)
-preds = (preds_prob > 0.5).astype(int).flatten()
-y_true = test_generator.classes
-
-# --> Print metrics
-acc = accuracy_score(y_true, preds)
-prec = precision_score(y_true, preds)
-rec = recall_score(y_true, preds)
-f1 = f1_score(y_true, preds)
-
-print("\n Evaluation Results on Hidden Test Set:")
-print(f" Accuracy:  {acc:.4f}")
-print(f" Precision: {prec:.4f}")
-print(f" Recall:    {rec:.4f}")
-print(f" F1 Score:  {f1:.4f}")
-print("\n Classification Report:\n", classification_report(y_true, preds, target_names=test_generator.class_indices.keys()))
