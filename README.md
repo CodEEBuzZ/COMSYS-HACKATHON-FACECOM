@@ -65,6 +65,15 @@ model.fit(
 
 Due to GitHub size limits, model weights (`.h5` files) are stored in Google Drive and linked in the submission.
 
+### 📝 Steps for running the code
+
+* **Step 1 :-** For Colab, then mount need to be done, code present in TASK_A.py. If run done in jupyter notebook or any other platform then mount no need to do with drive. Just change the path according to the path of the system where the datas will be present either in C or D or any other place.
+* **Step 2 :-** Import all the libraries which are present.
+*  **Step 3 :-** Then paste configuration, now changing those path need to be done.
+*  **Step 4 :-** After that all the code have to be run as it is and it will give result as well as it will train the the dats along with fine tunning.
+*  **Step 5 :-** At last loading need to be done so model path need to be give correctly that where the model is save, then it will give all the metrices. OR. The model is provided by me it can also be used then from that model correct result will be given.
+*  **Step 6 :-** This section is optional or it can also done that this section is for the hidden test checking, as 'Final Evaluation for Hidden Test'.
+
 ### 📊 Evaluation Metrics
 
 The whole code is present in the TASK_A.py file, their all the paths which are present need to change according to the system paths where the program will be run and then after that the program need to be run after that the whole output will be generate.
@@ -83,7 +92,6 @@ Evaluation Results on Validation Set :---
 | Precision  | 0.9246 |
 |   Recall   | 0.8896 |
 |  F1-Score  | 0.9068 |
-
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
