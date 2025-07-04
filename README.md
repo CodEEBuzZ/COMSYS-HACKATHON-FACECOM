@@ -80,10 +80,9 @@ Due to GitHub size limits, model weights (`.h5` files) are stored in Google Driv
 * **Step 1 :-** For Colab, then mount need to be done, code present in TASK_A.py. If this program runs in jupyter notebook or any other platform then mount no need to do with drive. Just change the path according to the path of the system where the datas will be present either in C or D or any other place or any drive.
 * **Step 2 :-** Import all the libraries which are present.
 *  **Step 3 :-** Then paste configuration, now changing those path need to be done.
-*  **Step 4 :-** After that all the code have to be run as it is and it will give result as well as it will train the the dats along with fine tunning.
+*  **Step 4 :-** After that all the code have to be run as it is and it will give result as well as it will train the datas along with fine tunning.
 *  **Step 5 :-** At last loading need to be done so for that model path need to be give correctly that where the model is save, then it will give all the metrices. OR. The model is provided by me it can also be used then from that also model will provide correct result.
-*  **Step 6 :-** This section is optional or it can be also done that this section is for the hidden test checking, as 'Final Evaluation for Hidden Test'.
-*  **Step 7 :-** The traning part and fine tunning part can be optional run if someone want to check the metrices from the uploaded model which save in .h5 format I shared in in github only. If someone want to do their own testing then that training and fine tunning code have to be run for getting the result.
+*  **Step 6 :-** The traning part and fine tunning part can be optional run if someone want to check the metrices from the uploaded model which save in .h5 format I have shared it in the github only. If someone want to do their own testing then that training and fine tunning code have to be run for getting the result.
 
 ### 📊 Evaluation Metrics
 
@@ -103,6 +102,14 @@ Evaluation Results on Validation Set :---
 | Precision  | 0.9246 |
 |   Recall   | 0.8896 |
 |  F1-Score  | 0.9068 |
+
+Evaluation Results on Train Set :---
+|   Metric   |  Score |
+| ---------- | ------ |
+| Accuracy   | 0.8768 |
+| Precision  | 0.9478 |
+|   Recall   | 0.8950 |
+|  F1-Score  | 0.9206 |
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -174,9 +181,9 @@ val_dir = "/content/drive/MyDrive/Colab Notebooks/Comys_Hackathon5/Task_B/val"
 # Ensure val dir exists
 os.makedirs(val_dir, exist_ok=True)
 
-# Select random 10 identities
+# Select random 550 identities
 identities = sorted([d for d in os.listdir(train_dir) if os.path.isdir(os.path.join(train_dir, d))])
-selected_ids = random.sample(identities, 450)
+selected_ids = random.sample(identities, 550)
 
 for identity in selected_ids:
     src_id_folder = os.path.join(train_dir, identity)
@@ -248,24 +255,37 @@ Due to GitHub size limits, model weights (`.h5` files) are stored in Google Driv
 * **Step 2 :-** Import all the libraries which are present.
 *  **Step 3 :-** Then paste configuration, image size and everything, then locations or file path need to be changed according to the system where the program will run.
 *  **Step 4 :-** After that all the code have to be run as it is and it will give result as well as it will train the the dats along with fine tunning.
-*  **Step 5 :-** Before metrices running one have to do that due to some problems in test and validation data in TASK_B so for that some distortion image have to transfer from test to val data after that metrices giving best accuracy or result. If this problem not occurs in any dataset then no need to do or run that part, if problem happens or present then it have to do. Because if the dataset becomes wrong then answer will come as 0. 
-*  **Step 6 :-** At last loading need to be done so for that model path need to be give correctly that where the model is save the model is embidding model, then it will give all the metrices. OR. The embedding model is provided by me it can also be used then from that also model will provide correct result.
-*  **Step 7 :-** That matrices section can be done in colab also as it will give better result in colab also. Just ignore the training portion 'Training Data' no need to re run and then run the whole remaining code with accurate path and metrices code then it will give best result.
+*  **Step 5 :-** Before metrices running one have to do that due to some problems in test and validation data sets in TASK_B so for that some distortion image have to transfer from test to val data after that the metrices will give best accuracy or result for validation set. If this problem not occurs in any dataset then no need to do or run that part 'Transfering some distortion image from train to val so that metrices can be better form zero', if problem happens or present then it have to do. Because if the dataset becomes wrong then answer will come as 0. 
+*  **Step 6 :-** At last loading need to be done so, for that model path need to be give correctly that where the model is save the model is 'embedding model', then it will give all the metrices. OR. That 'embedding model' is provided by me it can also be used then from that also model will provide correct result.
+*  **Step 7 :-** That matrices section can be done in colab also as it will give better result in colab also. Just ignore the training portion 'Training Data' no need to re run it. Just run the whole remaining code with accurate path and metrices code then it will give best result.
 *  **Step 8 :-** Model file already given in .h5 format it can also be used for the running the whole code and also for the metrices checking also.
 
 ### 📊 Evaluation Metrics
 
 The whole code is present in the TASK_B.py file, their all the paths which are present need to change according to the system paths where the program will be run and then after that the program need to be run after that the whole output will be generate.
 
-* Top-1 Accuracy
-* Macro-averaged F1-Score
+* Accuracy
+* Precision
+* Recall
+* F1-Score
 
 ### ✅ Evaluation Metrices Results
 
-| Metric   | Score  |
-| -------- | ------ |
-| Accuracy | 0.6164 |
-| F1-Score | 0.5672 |
+Evaluation Results on Train Set :---
+|   Metric   |  Score |
+| ---------- | ------ |
+| Accuracy   | 0.8626 |
+| Precision  | 0.9246 |
+|   Recall   | 0.8896 |
+|  F1-Score  | 0.9068 |
+
+Evaluation Results on Validation Set :---
+|   Metric   |  Score |
+| ---------- | ------ |
+| Accuracy   | 0.5628 |
+| Precision  | 0.6347 |
+|   Recall   | 0.4833 |
+|  F1-Score  | 0.5334 |
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
