@@ -250,7 +250,7 @@ Due to GitHub size limits, model weights (`.h5` files) are stored in Google Driv
 *  **Step 5 :-** Before metrices running one have to do that due to some problems in test and validation data in TASK_B so for that some distortion image have to transfer from test to val data after that metrices giving best accuracy or result. If this problem not occurs in any dataset then no need to do or run that part, if problem happens or present then it have to do. Because if the dataset becomes wrong then answer will come as 0. 
 *  **Step 6 :-** At last loading need to be done so for that model path need to be give correctly that where the model is save the model is embidding model, then it will give all the metrices. OR. The embedding model is provided by me it can also be used then from that also model will provide correct result.
 *  **Step 7 :-** That matrices section can be done in colab also as it will give better result in colab also. Just ignore the training portion 'Training Data' no need to re run and then run the whole remaining code with accurate path and metrices code then it will give best result.
-*  **Step 8 :-** Model file already given in .h5 it can also be used for the running the whole code and also for the metrices checking also.
+*  **Step 8 :-** Model file already given in .h5 format it can also be used for the running the whole code and also for the metrices checking also.
 
 ### 📊 Evaluation Metrics
 
