@@ -219,7 +219,7 @@ Due to GitHub size limits, model weights (`.h5` files) are stored in Google Driv
 * Install Miniconda
 * Create a conda environment
 ```bash
-   conda create --name tf python=3.9
+   conda create --name tf python=3.10
    conda deactivate
    conda activate tf
    ```
