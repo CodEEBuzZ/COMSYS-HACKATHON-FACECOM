@@ -134,7 +134,7 @@ print("--> Saving models after training chunk...")
 model.save(MODEL_SAVE_PATH)
 embedding_model.save(EMBEDDING_SAVE_PATH)
 
-
+# After training need to do this code for checking the correct place and embedding data
 embedding_model = tf.keras.models.load_model(EMBEDDING_SAVE_PATH)
 
 def get_embedding(img_path):
