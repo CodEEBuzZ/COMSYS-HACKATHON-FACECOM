@@ -274,10 +274,10 @@ The whole code is present in the TASK_B.py file, their all the paths which are p
 Evaluation Results on Train Set :---
 |   Metric   |  Score |
 | ---------- | ------ |
-| Accuracy   | 0.8626 |
-| Precision  | 0.9246 |
-|   Recall   | 0.8896 |
-|  F1-Score  | 0.9068 |
+| Accuracy   | 0.4829 |
+| Precision  | 0.9009 |
+|   Recall   | 0.8618 |
+|  F1-Score  | 0.8709 |
 
 Evaluation Results on Validation Set :---
 |   Metric   |  Score |
