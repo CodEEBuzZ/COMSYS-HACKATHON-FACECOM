@@ -117,8 +117,33 @@ print(f"--> Recall:    {rec:.4f}")
 print(f"--> F1 Score:  {f1:.4f}")
 print("\n--> Classification Report:\n", classification_report(y_true, preds, target_names=val_generator.class_indices.keys()))
 
+# Evaluate on training set
+train_generator_for_eval = val_datagen.flow_from_directory(
+    TRAIN_DIR,
+    target_size=IMG_SIZE,
+    batch_size=1,
+    class_mode='binary',
+    shuffle=False
+)
 
-# ===================== Final Evaluation for Hidden Test =====================
+preds_train_prob = model.predict(train_generator_for_eval)
+preds_train = (preds_train_prob > 0.5).astype(int).flatten()
+y_train_true = train_generator_for_eval.classes
+
+# Compute training metrics
+acc_train = accuracy_score(y_train_true, preds_train)
+prec_train = precision_score(y_train_true, preds_train)
+rec_train = recall_score(y_train_true, preds_train)
+f1_train = f1_score(y_train_true, preds_train)
+
+print("\n.......... Training Results ...........")
+print(f"--> Accuracy:  {acc_train:.4f}")
+print(f"--> Precision: {prec_train:.4f}")
+print(f"--> Recall:    {rec_train:.4f}")
+print(f"--> F1 Score:  {f1_train:.4f}")
+
+
+# ===================== Final Evaluation for Hidden Test (Totally Optional) this last part =====================
 
 #Block for testing on "Hidden Test"
 from tensorflow.keras.models import load_model
