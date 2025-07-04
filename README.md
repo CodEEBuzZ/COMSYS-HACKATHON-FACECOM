@@ -218,29 +218,29 @@ Due to GitHub size limits, model weights (`.h5` files) are stored in Google Driv
 * Install Microsoft Visual C++ Redistributable
 * Install Miniconda
 * Create a conda environment
-       ```bash
-       * conda create --name tf python=3.9
-       * conda deactivate
-         conda activate tf
-       ```
+```bash
+   conda create --name tf python=3.9
+   conda deactivate
+   conda activate tf
+   ```
 * GPU setup
-       ```bash
-       *  conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
-       ```
+```bash
+   conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
+   ```
 * Install TensorFlow
-       ```bash
-       * pip install --upgrade pip
-       * pip install "tensorflow<2.11"
-       ```
+```bash
+   pip install --upgrade pip
+   pip install "tensorflow<2.11"
+   ```
 * Verify the installation
-       ```bash
-       * python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
-       ```
+```bash
+   python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+   ```
 * In Jupyter Notebook
-       ```bash
-       * !pip install scikit-learn tqdm opencv-python matplotlib pandas
-       * !pip install pillow
-       ```
+```bash
+   !pip install scikit-learn tqdm opencv-python matplotlib pandas
+   !pip install pillow
+   ```
   
 ***STEPS***
 * **Step 1 :-** This program can be runs in jupyter notebook or any other platform then mount no need to do with drive. Just change the path according to the path of the system where the datas will be present either in C or D or any other place or any drive.
