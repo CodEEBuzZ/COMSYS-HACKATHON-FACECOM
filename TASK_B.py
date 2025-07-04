@@ -166,9 +166,9 @@ val_dir = "/content/drive/MyDrive/Colab Notebooks/Comys_Hackathon5/Task_B/val"
 # Ensure val dir exists
 os.makedirs(val_dir, exist_ok=True)
 
-# Select random 450 identities
+# Select random 550 identities
 identities = sorted([d for d in os.listdir(train_dir) if os.path.isdir(os.path.join(train_dir, d))])
-selected_ids = random.sample(identities, 450)
+selected_ids = random.sample(identities, 550)
 
 for identity in selected_ids:
     src_id_folder = os.path.join(train_dir, identity)
