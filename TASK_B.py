@@ -201,16 +201,15 @@ from tensorflow.keras.models import load_model
 import numpy as np
 import os
 from tqdm import tqdm
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
-# Constants
+# -------- CONFIG --------
 IMG_SIZE = (128, 128)
-EMBEDDING_SAVE_PATH = "D:/COMSYS Hackathon/Comys_Hackathon5/Task_B/siamese_embedding_model.h5" # Siamese_embedding_model.h5 path must be here
-DISTORTED_DIR = "D:/COMSYS Hackathon/Comys_Hackathon5/Task_B/val" # Val Path must be here
-IDENTITY_DIR = "D:/COMSYS Hackathon/Comys_Hackathon5/Task_B/train" # Train Path must be here
+THRESHOLD = 0.3
+# ------------------------
 
-# Load model
+# Load embedding model
 model = load_model(EMBEDDING_SAVE_PATH)
 
 def load_image(path):
@@ -221,10 +220,10 @@ def load_image(path):
 def get_embedding(img_path):
     return model.predict(load_image(img_path))[0]
 
-def evaluate_fast(distorted_dir, identity_dir, threshold=0.3):
-    print("\nIndexing reference embeddings...")
+def evaluate_and_get_metrics(distorted_dir, identity_dir, threshold=0.3):
+    print(f"\n🔍 Evaluating on: {distorted_dir}")
     identity_db = {}
-    for identity in tqdm(os.listdir(identity_dir)):
+    for identity in tqdm(os.listdir(identity_dir), desc="Indexing identities"):
         identity_folder = os.path.join(identity_dir, identity)
         if not os.path.isdir(identity_folder): continue
         refs = [os.path.join(identity_folder, f) for f in os.listdir(identity_folder)
@@ -233,10 +232,9 @@ def evaluate_fast(distorted_dir, identity_dir, threshold=0.3):
         if embeddings:
             identity_db[identity] = np.mean(embeddings, axis=0)
 
-    print("Matching distorted images...")
     y_true, y_pred = [], []
 
-    for identity in tqdm(os.listdir(distorted_dir)):
+    for identity in tqdm(os.listdir(distorted_dir), desc="Evaluating distortions"):
         distorted_folder = os.path.join(distorted_dir, identity)
         if not os.path.isdir(distorted_folder): continue
         for file in os.listdir(distorted_folder):
@@ -253,14 +251,25 @@ def evaluate_fast(distorted_dir, identity_dir, threshold=0.3):
                 y_true.append(identity)
                 y_pred.append(best_match if min_dist < threshold else "Unknown")
 
+    # Convert labels to index for metrics
     label_map = {label: idx for idx, label in enumerate(set(y_true + y_pred))}
     y_true_idx = [label_map[i] for i in y_true]
     y_pred_idx = [label_map[i] for i in y_pred]
 
-    acc = accuracy_score(y_true_idx, y_pred_idx)
-    f1 = f1_score(y_true_idx, y_pred_idx, average='macro')
-    print("\n---------------------------Final Evaluation---------------------------")
-    print(f"Top-1 Accuracy         : {acc:.4f}")
-    print(f"Macro-averaged F1 Score: {f1:.4f}")
+    acc = accuracy_score(y_true_idx, y_pred_idx) * 100
+    precision = precision_score(y_true_idx, y_pred_idx, average='macro') * 100
+    recall = recall_score(y_true_idx, y_pred_idx, average='macro') * 100
+    f1 = f1_score(y_true_idx, y_pred_idx, average='macro') * 100
 
-evaluate_fast(DISTORTED_DIR, IDENTITY_DIR)
+    print(f"\n------------Results for {os.path.basename(distorted_dir).upper()}:------------")
+    print(f"Accuracy   : {acc:.2f}%")
+    print(f"Precision  : {precision:.2f}%")
+    print(f"Recall     : {recall:.2f}%")
+    print(f"F1 Score   : {f1:.2f}%")
+
+    return acc, precision, recall, f1
+# Training Set Evaluation
+train_acc, train_prec, train_rec, train_f1 = evaluate_and_get_metrics(IDENTITY_DIR, IDENTITY_DIR)
+
+# Validation Set Evaluation
+val_acc, val_prec, val_rec, val_f1 = evaluate_and_get_metrics(DISTORTED_DIR, IDENTITY_DIR)
