@@ -83,6 +83,7 @@ Due to GitHub size limits, model weights (`.h5` files) are stored in Google Driv
 *  **Step 4 :-** After that all the code have to be run as it is and it will give result as well as it will train the the dats along with fine tunning.
 *  **Step 5 :-** At last loading need to be done so for that model path need to be give correctly that where the model is save, then it will give all the metrices. OR. The model is provided by me it can also be used then from that also model will provide correct result.
 *  **Step 6 :-** This section is optional or it can be also done that this section is for the hidden test checking, as 'Final Evaluation for Hidden Test'.
+*  **Step 7 :-** The traning part and fine tunning part can be optional run if someone want to check the metrices from the uploaded model which save in .h5 format I shared in in github only. If someone want to do their own testing then that training and fine tunning code have to be run for getting the result.
 
 ### 📊 Evaluation Metrics
 
